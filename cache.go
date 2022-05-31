@@ -2,13 +2,6 @@ package cache
 
 import "time"
 
-const (
-	MinUint uint = 0 // binary: all zeroes
-
-	// Perform a bitwise NOT to change every bit from 0 to 1
-	MaxUint = ^MinUint // binary: all ones
-)
-
 type Cache struct {
 	data map[string]item
 }
@@ -34,7 +27,7 @@ func (c *Cache) Get(key string) (string, bool) {
 
 func (c *Cache) Put(key, value string) {
 	//places a value with an associated key into cache. Value put with this method never expired(have infinite deadline). Putting into the existing key should overwrite the value
-	c.data[key] = item{value, time.Unix(int64(MaxUint), 0)}
+	c.data[key] = item{value, time.Now().Add(time.Hour * 1000)}
 }
 
 func (c *Cache) Keys() []string {
