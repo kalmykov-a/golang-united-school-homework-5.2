@@ -12,7 +12,7 @@ type item struct {
 }
 
 func NewCache(key string, value string, deadline time.Time) Cache {
-	return Cache{}
+	return Cache{map[string]item{key: {value, deadline}}}
 }
 
 func (c *Cache) Get(key string) (string, bool) {
